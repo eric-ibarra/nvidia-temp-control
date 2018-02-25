@@ -124,12 +124,16 @@ if __name__ == '__main__':
 
     # Define your ambient temperature in degrees C
     ambient = 25
-    
+
     command = sys.argv[1].lower()
     parameter = sys.argv[2].lower()
 
     if command == 'continuous':
-        adjust_temp_limit(ambient, int(parameter))
+        temperature = int(parameter)
+        while True:
+            print 'Starting continuous temperature management target = %s C' % temperature
+            time.sleep(20)
+            adjust_temp_limit(ambient, temperature)
     else:
         # static setting
         set_gpu_power_levels(parameter)
